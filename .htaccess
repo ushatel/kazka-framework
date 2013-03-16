@@ -1,0 +1,41 @@
+AddDefaultCharset utf-8
+
+#Options +ExecCGI
+DirectoryIndex Controller.php
+
+# ---- URL REWRITING ---- #
+
+RewriteEngine ON
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule .+ - [L]
+
+#RewriteRule ^$    /index.php    		[QSA,L]
+#RewriteRule ^index_ru.html$ /index_ru.php 	[QSA,L]
+#RewriteRule ^index_ua.html$ /index_ua.php 	[QSA,L]
+#RewriteRule ^index_en.html$ /index.php 	[QSA,L]
+
+RewriteRule ^$ 		 /Controller.php	[QSA,L] 
+RewriteRule ^index.html$ /Controller.php	[QSA,L]
+
+
+RewriteRule ^([^/]+)/(.*)/(.*).html$  /Controller.php?module=$1&page=$2&identifier=$3 [QSA,L]
+RewriteRule ^([^/]+)/(.*)/(.*)/$      /Controller.php?module=$1&page=$2&identifier=$3 [QSA,L]
+RewriteRule ^([^/]+)/(.*)/(.*)$       /Controller.php?module=$1&page=$2&identifier=$3 [QSA,L]
+
+
+
+RewriteRule ^([^/]+)/(.*).html$ /Controller.php?module=$1&page=$2 [QSA,L]
+RewriteRule ^([^/]+)/(.*)$ 	/Controller.php?module=$1&page=$2 [QSA,L]
+
+
+RewriteRule ^([^/]+).html$ /Controller.php?module=$1 [QSA,L]
+RewriteRule ^([^/]+)$ 	   /Controller.php?module=$1 [QSA,L]
+
+
+#RewriteRule ^([^/]+)/(.*)/(.*)/(.*)/(.*).html$ /Controller.php?module=$1&cat=$2&id=$3&country=$3&kurort=$4&last=$5 [QSA,L]
+
+
+# ---- URL REWRITING ---- #
